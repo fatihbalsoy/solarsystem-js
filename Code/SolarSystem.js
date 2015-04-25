@@ -16,6 +16,52 @@
 *   Short URL: http://goo.gl/zPbGpE
 *   URL Clicks: http://goo.gl/#analytics/goo.gl/zPbGpE/all_time
 *   I never copied this program: https://www.khanacademy.org/computer-programming/scale-solar-system/991918981
+
+*   Report Bugs Here:
+*   https://bitbucket.org/fatih_balsoy/solar-system-js/issues?status=new&status=open
+
+~~~~~~~~~~README~~~~~~~~~~~~~~~
+Solar System
+    Keys
+        'W' Yaw Up
+        'S' Yaw Down
+        'C' Center
+        'R' Restart
+        'Q' Names
+        'M' Stop Time
+        '<' Scroll back in time
+        '>' Scroll forward in time
+        '/' Normal Speed
+        '+' Zoom In
+        '-' Zoom Out
+        
+    Info
+This is a scale model of our solar system at a scale of 10,000 miles
+in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by using numbers on your keyboard.
+
+        0 - Sun
+        1 - Mercury
+        2 - Venus
+        3 - Earth
+        4 - Mars
+        5 - Jupiter
+        6 - Saturn
+        7 - Uranus
+        8 - Neptune
+        9 - Pluto
+        
+    Solar Experience Tool
+        The Solar Experience Tool is currently in beta, which is not          stable. The only stabilized feature is the info inside it. To         open one, you'll need to use numbers according to the order of         the planets (See Above in Info). The following is featured in         the Tool-box:
+        
+            Name
+            Type
+            Mass
+            Surface Gravity
+            Planetary Satellites
+            Distance to Sun in miles
+            Distance to Earth in miles
+            Current Year on the planet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 var scene = "solarS";
@@ -79,7 +125,7 @@ var orbit = function(){
 };
 
 var planetDist = function(planet1, planet2){
-    var dist = Math.round(Math.sqrt(Math.pow((realX[planet1]-realX[planet2]),2)+Math.pow((realY[planet1]-realY[planet2]),2))*1000000/92955807.3)+" au";
+    var dist = Math.round(Math.sqrt(Math.pow((realX[planet1]-realX[planet2]),2)+Math.pow((realY[planet1]-realY[planet2]),2))*1000000/*92955807.3*/)+" miles";
     return planet[planet1].n+" to "+planet[planet2].n+": "+dist;
 };
 
@@ -114,9 +160,9 @@ var planetDesc = function(planetID){
         } else {
             text("Planetary Satellites:\n"+planetInfo[planetID].moons,lx,ly+160);
             text(planetDist(planetID,9),lx,ly+200,130,50);
-            text(planetDist(planetID,2),lx,ly+220,130,50);
+            text(planetDist(planetID,2),lx,ly+240,130,50);
             var plYr = Math.round(year() + planet[planetID].a/360);
-            text("Year:\n"+plYr,lx,ly+260);
+            text("Year:\n"+plYr,lx,ly+292);
         }
         rectMode(LEFT);
         textSize(12);
@@ -125,7 +171,6 @@ var planetDesc = function(planetID){
 
 var solarSys = function(){
     orbit();
-    
     //Sun
     fill(235, 242, 17);
     
@@ -154,14 +199,25 @@ var solarSys = function(){
         fill(planet[i].c);
             ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
         planet[i].a += t*(1.0/planet[i].y);
+            if (zoom<1){
+            fill(255,255,255,100*zoom);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/zoom, planet[i].s*1.5/zoom);
+            }
         } else if (i === 9){
             x[i] = 0;
             y[i] = 0;
             ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
+            fill(235, 242, 17,150*zoom);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/(zoom*2), planet[i].s*1.5/(zoom*2));
         } else {
+            fill(planet[i].c);
         ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
         planet[i].a += t*(1.0/planet[i].y);
         //planet[i].a %= 360;
+        if (zoom<1){
+            fill(255,255,255,100*zoom);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/(zoom*2), planet[i].s*1.5/(zoom*2));
+        }
         }
     }
     //Saturn to Sun + (Saturn to Neptune divided by 2) + Sun's Location = Pluto's orbit center
@@ -311,6 +367,7 @@ var solarSys = function(){
             break;
         }
     }
+    
 };
 
 var keyHelp = function(key, desc, x, y){

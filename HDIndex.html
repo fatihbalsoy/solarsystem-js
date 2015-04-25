@@ -12,7 +12,7 @@
   <script>
     var canvas = document.getElementById("canvas");
     var processing = new Processing(canvas, function(processing) {
-        processing.size(700, 700);
+        processing.size(1320, 640);
         processing.background(0xFFF);
 
         var mouseIsPressed = false;
@@ -97,8 +97,8 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 */
 
 var scene = "start";
-var locationX = 350;
-var locationY = 350;
+var locationX = 660;
+var locationY = 320;
 var locPX = 952;
 var t = 0.0015;
 var yr = 2015;
@@ -106,8 +106,8 @@ var mo = 1;
 var showPlInfo = false;
 var PlData = false;
 textFont(createFont("Segoe UI"));
-    var stx = 350;
-    var sty = 350;
+    var stx = 660;
+    var sty = 320;
 
 var zoom = 1.0;
 var tilt = 0.3;
@@ -236,14 +236,13 @@ var planetDesc = function(planetID){
         //showPlInfo = false;
     }
     if (showPlInfo === true){
-        var x = 597;
-        var y = 350;
-        var lx = 518;
-        var ly = 200;
-        rectMode(CENTER);
+        var x = 660;
+        var y = 320;
+        var lx = 1100;
+        var ly = 320;
         //fill 54 (Great Color for Material Design)
         fill(54, 54, 54,100);
-        rect(597,350,177,357,5);
+        rect(lx-20,ly-40,177,357,5);
         fill(255, 255, 255);
         textSize(20);
         text(planetInfo[planetID].name, lx,ly);
@@ -416,62 +415,62 @@ var solarSys = function(mode){
                 }
             break;
             case '1':
-                locationX = -x[0]+(350);
-                locationY = -y[0]*tilt+(350);
+                locationX = -x[0]+(660);
+                locationY = -y[0]*tilt+(320);
                 planetNames();
                 planetDesc(0);
             break;
             case '2':
-                locationX = -x[1]+(350);
-                locationY = -y[1]*tilt+(350);
+                locationX = -x[1]+(660);
+                locationY = -y[1]*tilt+(320);
                 planetNames();
                 planetDesc(1);
             break;
             case '3':
-                locationX = -x[2]+(350);
-                locationY = -y[2]*tilt+(350);
+                locationX = -x[2]+(660);
+                locationY = -y[2]*tilt+(320);
                 planetNames();
                 planetDesc(2);
             break;
             case '4':
-                locationX = -x[3]+(350);
-                locationY = -y[3]*tilt+(350);
+                locationX = -x[3]+(660);
+                locationY = -y[3]*tilt+(320);
                 planetNames();
                 planetDesc(3);
             break;
             case '5':
-                locationX = -x[4]+(350);
-                locationY = -y[4]*tilt+(350);
+                locationX = -x[4]+(660);
+                locationY = -y[4]*tilt+(320);
                 planetNames();
                 planetDesc(4);
             break;
             case '6':
-                locationX = -x[5]+(350);
-                locationY = -y[5]*tilt+(350);
+                locationX = -x[5]+(660);
+                locationY = -y[5]*tilt+(320);
                 planetNames();
                 planetDesc(5);
             break;
             case '7':
-                locationX = -x[6]+(350);
-                locationY = -y[6]*tilt+(350);
+                locationX = -x[6]+(660);
+                locationY = -y[6]*tilt+(320);
                 planetNames();
                 planetDesc(6);
             break;
             case '8':
-                locationX = -x[7]+(350);
-                locationY = -y[7]*tilt+(350);
+                locationX = -x[7]+(660);
+                locationY = -y[7]*tilt+(320);
                 planetNames();
                 planetDesc(7);
             break;
              case '9':
-                locationX = -x[8]+(350);
-                locationY = -y[8]*tilt+(350);
+                locationX = -x[8]+(660);
+                locationY = -y[8]*tilt+(320);
                 planetNames();
                 planetDesc(8);
             break;
             case '0':
-                locationX = -x[9]+(350);
-                locationY = -y[9]*tilt+(350);
+                locationX = -x[9]+(660);
+                locationY = -y[9]*tilt+(320);
                 planetNames();
                 planetDesc(9);
             break;
@@ -510,14 +509,13 @@ var start = function(){
     fill(255, 255, 255);
     text("Solar System 2", stx,sty-70);
     textSize(15);
-    var stopw = 1;
     text(splash[rand],stx,sty+89);
     var start = new button(stx,sty-20,375,40,color(61,61,61,150),0,"rect","Start");
     start.draw();
     if (mouseIsPressed && start.mouseIn){
         scene = "solarS";
-        locationX = 350;
-        locationY = 350;
+        locationX = 660;
+        locationY = 320;
         t = 0.0015;
         tilt = 0.3;
         zoom = 1.0;
@@ -534,11 +532,11 @@ var data = function(){
     //line(x[5]+locationX,y[5]*tilt+locationY,x[4]+locationX,y[4]*tilt+locationY);
     text("Date: "+Math.round(yr)+" (Example)",20,showDataY+60);     
     text("Zoom: "+Math.round(zoom),20,showDataY+20);
-    text("Speed: x"+Math.round(t/0.0015),20,showDataY+40);
+    text("Speed: x"+Math.round(t),20,showDataY+40);
     text("Tilt: "+Math.round(tilt*90)+" degrees",20,showDataY);
     text("Graph: "+Math.round(locationX) +", "+Math.round(locationY),20,showDataY+80);
-    var moX = mouseX + locationX -350;
-    var moY = mouseY + locationY -350;
+    var moX = mouseX + locationX -660;
+    var moY = mouseY + locationY -320;
     text("Mouse: "+Math.round(moX) +", "+ Math.round(moY),20,showDataY+100);
     keyHelp([
         "W",
@@ -564,12 +562,12 @@ var data = function(){
         "Normal Speed",
         "Zoom In",
         "Zoom Out"
-        ],-33,629);
+        ],280,580);
         textAlign(CENTER,CENTER);
-    text("Use arrow keys to move around", 246,602);
-    text("Use numbers to locate planets (Ex: 1 is Mercury)",497,602);
+    text("Use arrow keys to move around", 500,550);
+    text("Use numbers to locate planets (Ex: 1 is Mercury)",750,550);
     textSize(30);
-    text("Solar System 2", 350,20);
+    text("Solar System 2", 660,20);
     textSize(12);
     textAlign(LEFT,LEFT);
     /*if(keyCode){
@@ -598,11 +596,11 @@ var data = function(){
         }
         switch(key.toString()){
             case 'c':
-                locationX = 350;
-                locationY = 350;
+                locationX = 660;
+                locationY = 320;
             break;
             case 'r':
-                Program.restart();
+                loop();
             break;
             
         }
@@ -642,7 +640,6 @@ draw = function() {
     background(0, 0, 0);
     scenePr();
 };
-
         }
         if (typeof draw !== 'undefined') processing.draw = draw;
     });

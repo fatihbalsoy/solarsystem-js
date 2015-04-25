@@ -1,0 +1,17 @@
+#greeting {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  margin: 15px;
+  color: #ffffff;
+}
+
+#info{
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  margin: 15px;
+  color: #ffffff;
+}
+
+html {
+  background-color: #000000;
+}

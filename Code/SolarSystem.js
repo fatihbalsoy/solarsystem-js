@@ -21,7 +21,7 @@
 *   https://bitbucket.org/fatih_balsoy/solar-system-js/issues?status=new&status=open
 
 ~~~~~~~~~~README~~~~~~~~~~~~~~~
-Solar System
+/*Solar System
     Keys
         'W' Yaw Up
         'S' Yaw Down
@@ -64,7 +64,7 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-var scene = "solarS";
+var scene = "start";
 var locationX = 350;
 var locationY = 350;
 var locPX = 952;
@@ -74,6 +74,8 @@ var mo = 1;
 var showPlInfo = false;
 var PlData = false;
 textFont(createFont("Segoe UI"));
+    var stx = 350;
+    var sty = 350;
 
 var zoom = 1.0;
 var tilt = 0.3;
@@ -82,6 +84,72 @@ var x = new Array(9);
 var y = new Array(9);
 var realX = new Array(9);
 var realY = new Array(9);
+
+////////ErrorWindow///////
+var error = function(title, errors, explanation, number){
+    this.title = title;
+    this.errors = errors;
+    this.exp = explanation;
+    this.num = number;
+};
+error.prototype.draw = function() {
+    rectMode(LEFT);
+    textAlign(LEFT,LEFT);
+    var bx = 165;
+    var by = 491;
+    noStroke();
+    fill(0, 0, 0, 150);
+    rect(0,0,700,700);
+    fill(255, 255, 255);
+    fill(255,255,255);
+    rect(bx,by,358,221,7); 
+    textSize(28);
+    fill(168, 168, 168);
+    text(this.title, bx+25, by+25, 302, 30);
+    textSize(20);
+    text(this.errors, bx+25, by+68, 301, 88);
+    textSize(15);
+    text("Error "+this.num+": "+this.exp,bx+25,by+160,304,36);
+};
+
+////////Buttons//////////
+var button = function(xB, yB, width, height, fllb, radius, shape, text) {
+    this.xB = xB;
+    this.yB = yB;
+    this.width = width;
+    this.height = height;
+    this.fllb = fllb;
+    this.radius = radius;
+    this.shape = shape;
+    this.text = text;
+}; 
+//This draws the buttons//
+button.prototype.draw = function() {
+    noStroke();
+    fill(this.fllb);
+    if (this.shape === "ellipse"){
+        ellipse(this.xB, this.yB, this.width, this.height);
+    } else if (this.shape === "rect") {
+        rect(this.xB, this.yB, this.width, this.height, this.radius);
+        textAlign(LEFT,LEFT);
+        fill(255, 255, 255);
+        textSize(20);
+        text(this.text, this.xB-20, this.yB-7, this.width, this.height);
+    } else {
+        var btnError = new error("Error", "Function values are entered wrong or can't find that value", "There is no such element as \""+ this.shape +"\" that was entered in the \'button\' function", "003");
+        btnError.draw();
+    }
+    fill(255, 255, 255);
+    //rect(this.xB, this.yB, this.width, this.height/2, 5);
+};
+//This is when the mouse is in the button//
+button.prototype.mouseIn = function() {
+    if (this.shape === "rect"){
+        return mouseX >= this.xB && mouseY >= this.yB && mouseX <= this.xB + this.width && mouseY <= this.yB + this.height;
+    } else if (this.shape === "ellipse"){
+        return mouseX >= this.xB-20 && mouseY >= this.yB-20 && mouseX <= this.xB-20 + this.width && mouseY <= this.yB-20 + this.height;
+    }
+}; 
 
 //Needs origins
 var planet = {
@@ -169,8 +237,16 @@ var planetDesc = function(planetID){
     }
 };
 
-var solarSys = function(){
+var solarSys = function(mode){
     orbit();
+    
+    if(mode==="start"){
+        locationX = stx/*350*/;
+        locationY = sty+161/*161*/;
+        t = 2;
+        tilt = 0;
+        zoom = 1;
+    }
     //Sun
     fill(235, 242, 17);
     
@@ -184,9 +260,11 @@ var solarSys = function(){
         realY[i] = -1.0*planet[i].d * sin(planet[i].a);
         fill(planet[i].c);
         if (i === 8){
+            pushMatrix();
             x[i] = x[i] + locPX*zoom; 
             ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
-            planet[i].a += t*(1.0/planet[i].y);  
+            planet[i].a += t*(1.0/planet[i].y);
+            popMatrix();
         } else if (i === 5){
         noFill();
         stroke(planet[i].c);
@@ -238,7 +316,7 @@ var solarSys = function(){
                 }
     };
     
-    if (keyIsPressed){
+    if (keyIsPressed&&mode==="solarS"){
         fill(217, 217, 217);
         switch(key.toString()){
             case 'q': 
@@ -387,9 +465,36 @@ var keyHelp = function(key, desc, x, y){
         textAlign(LEFT,LEFT);
     }
 };
+    
+    var rand = Math.floor((Math.random() * 14) + 0);
+var start = function(){
+    var splash = [planetDist(2,9),"Scale of 10,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation"];
+    var fc = 0;
+    textSize(30);
+    textAlign(CENTER,CENTER);
+    fill(61, 61, 61,150);
+    rectMode(CENTER);
+    rect(stx,sty,375,230,5);
+    fill(255, 255, 255);
+    text("Solar System²", stx,sty-70);
+    textSize(15);
+    var stopw = 1;
+    text(splash[rand],stx,sty+89);
+    var start = new button(stx,sty-20,375,40,color(61,61,61,150),0,"rect","Start");
+    start.draw();
+    if (mouseIsPressed && start.mouseIn){
+        scene = "solarS";
+        locationX = 350;
+        locationY = 350;
+        t = 0.05;
+        tilt = 0.3;
+        zoom = 1.0;
+    }
+};
 
 //playSound(getSound("retro/coin"));
 var data = function(){
+    rectMode(RIGHT);
     fill(135, 135, 135);
     var showDataY = 500;
     //text(planetDist(5,4),20,showDataY-20);
@@ -491,8 +596,12 @@ var scenePr = function(){
     switch(scene){
         case "solarS":
             starsBack();
-            solarSys();
+            solarSys("solarS");
             data();
+        break;
+        case "start":
+            solarSys("start");
+            start();
         break;
     }
 };

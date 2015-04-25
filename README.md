@@ -2,17 +2,17 @@
 
 ## Keys ##
 
-* W - Yaw Up
-* S - Yaw Down
-* C - Center
-* R - Restart
-* Q - Names
-* M - Stop Time
-* < - Scroll back in time
-* > - Scroll forward in time
-* / - Normal Speed
-* + - Zoom In
-* - - Zoom Out
+* 'W'  Yaw Up
+* 'S'  Yaw Down
+* 'C'  Center
+* 'R'  Restart
+* 'Q'  Names
+* 'M'  Stop Time
+* '<'  Scroll back in time
+* '>'  Scroll forward in time
+* '/'  Normal Speed
+* '+'  Zoom In
+* '-'  Zoom Out
 
 
 ## Info ##

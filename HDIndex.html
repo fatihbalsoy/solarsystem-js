@@ -10,8 +10,8 @@
   <script src ="main.js"></script>
   <style src ="styles.css"></style>
   <script>
-	var JSheight = 640;
-	var JSwidth = 1320;
+	var JSheight = window.outerHeight-(window.outerHeight-window.innerHeight)-50;
+	var JSwidth = window.outerWidth-50;
     var canvas = document.getElementById("canvas");
     var processing = new Processing(canvas, function(processing) {
         processing.size(JSwidth, JSheight);

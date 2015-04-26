@@ -134,21 +134,21 @@ var error = function(title, errors, explanation, number){
 error.prototype.draw = function() {
     rectMode(LEFT);
     textAlign(LEFT,LEFT);
-    var bx = 165;
-    var by = 491;
+    var bx = JSx-179;
+    var by = JSy-110.5;
     noStroke();
     fill(0, 0, 0, 150);
-    rect(0,0,700,700);
+    rect(0,0,JSwidth,JSheight);
     fill(255, 255, 255);
     fill(255,255,255);
     rect(bx,by,358,221,7); 
     textSize(28);
-    fill(168, 168, 168);
+    fill(92, 92, 92);
     text(this.title, bx+25, by+25, 302, 30);
     textSize(20);
-    text(this.errors, bx+25, by+68, 301, 88);
+    text(this.errors, bx+25, by+68, 301, 150);
     textSize(15);
-    text("Error "+this.num+": "+this.exp,bx+25,by+160,304,36);
+    text("Error "+this.num+": "+this.exp,bx+25,by+180,304,36);
 };
 
 ////////Buttons//////////
@@ -233,7 +233,8 @@ var orbit = function(){
 
 var planetDist = function(planet1, planet2){
     var dist = Math.round(Math.sqrt(Math.pow((realX[planet1]-realX[planet2]),2)+Math.pow((realY[planet1]-realY[planet2]),2))*1000000/*92955807.3*/)+" miles";
-    return planet[planet1].n+" to "+planet[planet2].n+": "+dist;
+    var dist2 = dist.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    return planet[planet1].n+" to "+planet[planet2].n+": "+dist2;
 };
 
 var planetDesc = function(planetID){
@@ -246,11 +247,11 @@ var planetDesc = function(planetID){
         var x = JSwidth-103;
         var y = JSy;
         var lx = JSwidth-182;
-        var ly = JSheight-500;
+        var ly = JSy-158;
         rectMode(CENTER);
         //fill 54 (Great Color for Material Design)
         fill(54, 54, 54,100);
-        rect(JSwidth-103,JSy,177,357,5);
+        rect(x,y,177,357,5);
         fill(255, 255, 255);
         textSize(20);
         text(planetInfo[planetID].name, lx,ly);
@@ -621,10 +622,12 @@ var data = function(){
         }
         switch(key.toString()){
             case 'c':
-                locationX = 350;
-                locationY = 350;
+                locationX = JSx;
+                locationY = JSy;
             break;
             case 'r':
+				var keyR = new error("Error", "The 'R' key would crash the program for now, if you're on Mac do Command+R or if you're on Windows do Ctrl-R","JSProcessing doesn't have Program.restart()","004");
+				keyR.draw();
                 Program.restart();
             break;
             

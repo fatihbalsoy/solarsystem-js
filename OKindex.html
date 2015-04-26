@@ -10,11 +10,9 @@
   <script src ="main.js"></script>
   <style src ="styles.css"></style>
   <script>
-	var JSheight = window.outerHeight-(window.outerHeight-window.innerHeight)-50;
-	var JSwidth = window.outerWidth-50;
     var canvas = document.getElementById("canvas");
     var processing = new Processing(canvas, function(processing) {
-        processing.size(JSwidth, JSheight);
+        processing.size(700, 700);
         processing.background(0xFFF);
 
         var mouseIsPressed = false;
@@ -99,12 +97,14 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 */
 
 var scene = "start";
+var JSheight = 700;
+var JSwidth = 700;
 var JSx = JSwidth/2;
 var JSy = JSheight/2;
-var locationX = JSx;
-var locationY = JSy;
+var locationX = JSwidth/2;
+var locationY = JSheight/2;
 var locPX = 952;
-var t = 0.0015;
+var t = 0.05;
 var yr = 2015;
 var mo = 1;
 var showPlInfo = false;
@@ -279,7 +279,7 @@ var solarSys = function(mode){
     if(mode==="start"){
         locationX = stx/*350*/;
         locationY = sty+161/*161*/;
-        t = 0.015;
+        t = 2;
         tilt = 0;
         zoom = 1;
     }
@@ -385,14 +385,14 @@ var solarSys = function(mode){
             break;
             case ',': 
                 //if (t >= 0.05){
-                    t -= 0.0015;
+                    t -= 0.05;
                 //}
             break;
             case '.': 
-                t += 0.0015;
+                t += 0.05;
             break;
             case '/':
-                t = 0.0015;
+                t = 0.05;
             break;
             case 'm':
                 t = 0;
@@ -512,7 +512,7 @@ var start = function(){
     rectMode(CENTER);
     rect(stx,sty,375,230,5);
     fill(255, 255, 255);
-    text("Solar System 2", stx,sty-70);
+    text("Solar System²", stx,sty-70);
     textSize(15);
     var stopw = 1;
     text(splash[rand],stx,sty+89);
@@ -522,7 +522,7 @@ var start = function(){
         scene = "solarS";
         locationX = JSx;
         locationY = JSy;
-        t = 0.0015;
+        t = 0.05;
         tilt = 0.3;
         zoom = 1.0;
     }
@@ -547,8 +547,8 @@ var data = function(){
     //line(x[5]+locationX,y[5]*tilt+locationY,x[4]+locationX,y[4]*tilt+locationY);
     text("Date: "+Math.round(yr)+" (Example)",20,showDataY+60);     
     text("Zoom: "+Math.round(zoom),20,showDataY+20);
-    text("Speed: x"+Math.round(t*50),20,showDataY+40);
-    text("Tilt: "+Math.round(tilt*90)+" degrees",20,showDataY);
+    text("Speed: x"+Math.round(t),20,showDataY+40);
+    text("Tilt: "+Math.round(tilt*90)+"°",20,showDataY);
     text("Graph: "+Math.round(locationX) +", "+Math.round(locationY),20,showDataY+80);
     var moX = mouseX + locationX -350;
     var moY = mouseY + locationY -350;
@@ -585,10 +585,10 @@ var data = function(){
         "Planets"
         ],-33+keysLocX,JSheight-71);
         textAlign(CENTER,CENTER);
-    text("Use arrow keys to move around", 250,JSheight-98);
-    text("Use numbers to locate planets (Ex: 1 is Mercury)",550,JSheight-98);
+    text("Use arrow keys to move around", 230,JSheight-98);
+    text("Use numbers to locate planets (Ex: 1 is Mercury)",500,JSheight-98);
     textSize(30);
-    text("Solar System 2", JSx,20);
+    text("Solar System²", JSx,20);
     textSize(12);
     textAlign(LEFT,LEFT);
     /*if(keyCode){
@@ -662,6 +662,7 @@ draw = function() {
     background(0, 0, 0);
     scenePr();
 };
+
 
         }
         if (typeof draw !== 'undefined') processing.draw = draw;

@@ -10,9 +10,11 @@
   <script src ="main.js"></script>
   <style src ="styles.css"></style>
   <script>
+	var JSheight = 640;
+	var JSwidth = 1320;
     var canvas = document.getElementById("canvas");
     var processing = new Processing(canvas, function(processing) {
-        processing.size(1320, 640);
+        processing.size(JSwidth, JSheight);
         processing.background(0xFFF);
 
         var mouseIsPressed = false;
@@ -30,7 +32,7 @@
         }
 
         with (processing) {
-/*   /*   ____        _              ____            _                 
+/*   ____        _              ____            _                 
 *   / ___|  ___ | | __ _ _ __  / ___| _   _ ___| |_ ___ _ __ ___  
 *   \___ \ / _ \| |/ _` | '__| \___ \| | | / __| __/ _ \ '_ ` _ \ 
 *    ___) | (_) | | (_| | |     ___) | |_| \__ \ ||  __/ | | | | |
@@ -97,8 +99,6 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 */
 
 var scene = "start";
-var JSheight = 640;
-var JSwidth = 1320;
 var JSx = JSwidth/2;
 var JSy = JSheight/2;
 var locationX = JSx;

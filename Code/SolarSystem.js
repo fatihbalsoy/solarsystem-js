@@ -65,8 +65,12 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 */
 
 var scene = "start";
-var locationX = 350;
-var locationY = 350;
+var JSheight = 700;
+var JSwidth = 700;
+var JSx = JSwidth/2;
+var JSy = JSheight/2;
+var locationX = JSwidth/2;
+var locationY = JSheight/2;
 var locPX = 952;
 var t = 0.05;
 var yr = 2015;
@@ -74,8 +78,8 @@ var mo = 1;
 var showPlInfo = false;
 var PlData = false;
 textFont(createFont("Segoe UI"));
-    var stx = 350;
-    var sty = 350;
+    var stx = locationX;
+    var sty = locationY;
 
 var zoom = 1.0;
 var tilt = 0.3;
@@ -204,14 +208,14 @@ var planetDesc = function(planetID){
         //showPlInfo = false;
     }
     if (showPlInfo === true){
-        var x = 597;
-        var y = 350;
-        var lx = 518;
-        var ly = 200;
+        var x = JSwidth-103;
+        var y = JSy;
+        var lx = JSwidth-182;
+        var ly = JSheight-500;
         rectMode(CENTER);
         //fill 54 (Great Color for Material Design)
         fill(54, 54, 54,100);
-        rect(597,350,177,357,5);
+        rect(JSwidth-103,JSy,177,357,5);
         fill(255, 255, 255);
         textSize(20);
         text(planetInfo[planetID].name, lx,ly);
@@ -384,62 +388,62 @@ var solarSys = function(mode){
                 }
             break;
             case '1':
-                locationX = -x[0]+(350);
-                locationY = -y[0]*tilt+(350);
+                locationX = -x[0]+(JSx);
+                locationY = -y[0]*tilt+(JSy);
                 planetNames();
                 planetDesc(0);
             break;
             case '2':
-                locationX = -x[1]+(350);
-                locationY = -y[1]*tilt+(350);
+                locationX = -x[1]+(JSx);
+                locationY = -y[1]*tilt+(JSy);
                 planetNames();
                 planetDesc(1);
             break;
             case '3':
-                locationX = -x[2]+(350);
-                locationY = -y[2]*tilt+(350);
+                locationX = -x[2]+(JSx);
+                locationY = -y[2]*tilt+(JSy);
                 planetNames();
                 planetDesc(2);
             break;
             case '4':
-                locationX = -x[3]+(350);
-                locationY = -y[3]*tilt+(350);
+                locationX = -x[3]+(JSx);
+                locationY = -y[3]*tilt+(JSy);
                 planetNames();
                 planetDesc(3);
             break;
             case '5':
-                locationX = -x[4]+(350);
-                locationY = -y[4]*tilt+(350);
+                locationX = -x[4]+(JSx);
+                locationY = -y[4]*tilt+(JSy);
                 planetNames();
                 planetDesc(4);
             break;
             case '6':
-                locationX = -x[5]+(350);
-                locationY = -y[5]*tilt+(350);
+                locationX = -x[5]+(JSx);
+                locationY = -y[5]*tilt+(JSy);
                 planetNames();
                 planetDesc(5);
             break;
             case '7':
-                locationX = -x[6]+(350);
-                locationY = -y[6]*tilt+(350);
+                locationX = -x[6]+(JSx);
+                locationY = -y[6]*tilt+(JSy);
                 planetNames();
                 planetDesc(6);
             break;
             case '8':
-                locationX = -x[7]+(350);
-                locationY = -y[7]*tilt+(350);
+                locationX = -x[7]+(JSx);
+                locationY = -y[7]*tilt+(JSy);
                 planetNames();
                 planetDesc(7);
             break;
              case '9':
-                locationX = -x[8]+(350);
-                locationY = -y[8]*tilt+(350);
+                locationX = -x[8]+(JSx);
+                locationY = -y[8]*tilt+(JSy);
                 planetNames();
                 planetDesc(8);
             break;
             case '0':
-                locationX = -x[9]+(350);
-                locationY = -y[9]*tilt+(350);
+                locationX = -x[9]+(JSx);
+                locationY = -y[9]*tilt+(JSy);
                 planetNames();
                 planetDesc(9);
             break;
@@ -466,9 +470,9 @@ var keyHelp = function(key, desc, x, y){
     }
 };
     
-    var rand = Math.floor((Math.random() * 14) + 0);
+    var rand = Math.floor((Math.random() * 18) + 0);
 var start = function(){
-    var splash = [planetDist(2,9),"Scale of 10,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation"];
+    var splash = [planetDist(2,9),"10,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation","Mobile Compatible","BitBucket Project","Version 2 x 1.05","Just another high-tech simulator!"];
     var fc = 0;
     textSize(30);
     textAlign(CENTER,CENTER);
@@ -480,23 +484,32 @@ var start = function(){
     textSize(15);
     var stopw = 1;
     text(splash[rand],stx,sty+89);
-    var start = new button(stx,sty-20,375,40,color(61,61,61,150),0,"rect","Start");
-    start.draw();
-    if (mouseIsPressed && start.mouseIn){
+    var startbtn = new button(stx,sty-20,375,40,color(61,61,61,150),0,"rect","Start");
+    startbtn.draw();
+    if (mouseIsPressed && startbtn.mouseIn){
         scene = "solarS";
-        locationX = 350;
-        locationY = 350;
+        locationX = JSx;
+        locationY = JSy;
         t = 0.05;
         tilt = 0.3;
         zoom = 1.0;
     }
+    if (keyIsPressed && key.toString() === 'r'){
+        Program.restart();
+    }
 };
 
+    var keysLocX = 0;
 //playSound(getSound("retro/coin"));
 var data = function(){
+    if (keyIsPressed && key.toString() === ']'){
+        keysLocX -= 2;   
+    } else if (keyIsPressed && key.toString() === '['){
+        keysLocX += 2;
+    }
     rectMode(RIGHT);
     fill(135, 135, 135);
-    var showDataY = 500;
+    var showDataY = JSheight-200;
     //text(planetDist(5,4),20,showDataY-20);
     //stroke(227, 227, 227);
     //line(x[5]+locationX,y[5]*tilt+locationY,x[4]+locationX,y[4]*tilt+locationY);
@@ -515,11 +528,14 @@ var data = function(){
         "R",
         "Q",
         "M",
+        "[",
+        "]",
         "<",
         ">",
         "/",
         "+",
-        "-"
+        "-",
+        "0-9"
         ],[
         "Yaw Up",
         "Yaw Down",
@@ -527,17 +543,20 @@ var data = function(){
         "Restart",
         "Names",
         "Stop",
+        "Help Left",
+        "Help Right",
         "Slow",
         "Fast",
         "Normal Speed",
         "Zoom In",
-        "Zoom Out"
-        ],-33,629);
+        "Zoom Out",
+        "Planets"
+        ],-33+keysLocX,JSheight-71);
         textAlign(CENTER,CENTER);
-    text("Use arrow keys to move around", 246,602);
-    text("Use numbers to locate planets (Ex: 1 is Mercury)",497,602);
+    text("Use arrow keys to move around", 230,JSheight-98);
+    text("Use numbers to locate planets (Ex: 1 is Mercury)",500,JSheight-98);
     textSize(30);
-    text("Solar System²", 350,20);
+    text("Solar System²", JSx,20);
     textSize(12);
     textAlign(LEFT,LEFT);
     /*if(keyCode){
@@ -579,6 +598,7 @@ var data = function(){
         locationX = mouseX;
         locationY = mouseY;
     };
+    textSize(12);
 };
 
 var starsBack = function(){

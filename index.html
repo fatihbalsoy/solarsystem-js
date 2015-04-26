@@ -205,16 +205,16 @@ var planet = {
     10:{"d":257,"a":0,"c":color(214, 214, 214),"s":1,"n":"Ceres","y":0.374751}
 };
 var planetInfo = {
-    0:{name:"Mercury",type:"Rocky Planet",mass:"3.3022e+23 kg\n(0.055 Earths)",gravity:"3.7 m/s²",moons:"None"},
-    1:{name:"Venus",type:"Rocky Planet",mass:"4.867e+24 kg\n(0.815 Earths)",gravity:"8.87 m/s²",moons:"None"},
-    2:{name:"Earth",type:"Rocky Planet",mass:"5.972e+24 kg\n(1 Earth)",gravity:"9.807 m/s²",moons:"1"},
-    3:{name:"Mars",type:"Rocky Planet",mass:"639e+21 kg\n(0.107 Earths)",gravity:"3.711 m/s²",moons:"2"},
-    4:{name:"Jupiter",type:"Gas Giant",mass:"1.898e+27 kg\n(317.8 Earths)",gravity:"24.79 m/s²",moons:"67"},
-    5:{name:"Saturn",type:"Gas Giant",mass:"568.3e+24 kg\n(95.16 Earths)",gravity:"10.44 m/s²",moons:"200"},
-    6:{name:"Uranus",type:"Gas Giant",mass:"86.81e+24 kg\n(14.54 Earths)",gravity:"8.69 m/s²",moons:"27"},
-    7:{name:"Neptune",type:"Gas Giant",mass:"102.4e+24 kg\n(17.15 Earths)",gravity:"11.15 m/s²",moons:"13"},
-    8:{name:"Pluto",type:"Dwarf Planet",mass:"1.30900e+22 kg\n(0.0066 Earths)",gravity:"0.658 m/s²",moons:"4"},
-    9:{name:"Sun",type:"Star",mass:"1.989e+30 kg\n(1.3M Earths)",gravity:"28.02 m/s²",moons:"8"}
+    0:{name:"Mercury",type:"Rocky Planet",mass:"3.3022e+23 kg\n(0.055 Earths)",gravity:"3.7",moons:"None"},
+    1:{name:"Venus",type:"Rocky Planet",mass:"4.867e+24 kg\n(0.815 Earths)",gravity:"8.87",moons:"None"},
+    2:{name:"Earth",type:"Rocky Planet",mass:"5.972e+24 kg\n(1 Earth)",gravity:"9.807",moons:"1"},
+    3:{name:"Mars",type:"Rocky Planet",mass:"639e+21 kg\n(0.107 Earths)",gravity:"3.711",moons:"2"},
+    4:{name:"Jupiter",type:"Gas Giant",mass:"1.898e+27 kg\n(317.8 Earths)",gravity:"24.79",moons:"67"},
+    5:{name:"Saturn",type:"Gas Giant",mass:"568.3e+24 kg\n(95.16 Earths)",gravity:"10.44",moons:"200"},
+    6:{name:"Uranus",type:"Gas Giant",mass:"86.81e+24 kg\n(14.54 Earths)",gravity:"8.69",moons:"27"},
+    7:{name:"Neptune",type:"Gas Giant",mass:"102.4e+24 kg\n(17.15 Earths)",gravity:"11.15",moons:"13"},
+    8:{name:"Pluto",type:"Dwarf Planet",mass:"1.30900e+22 kg\n(0.0066 Earths)",gravity:"0.658",moons:"4"},
+    9:{name:"Sun",type:"Star",mass:"1.989e+30 kg\n(1.3M Earths)",gravity:"28.02",moons:"8"}
 };
 
 var orbit = function(){
@@ -261,7 +261,7 @@ var planetDesc = function(planetID){
         //for (var i = 0; i < returnText.length; i++){
             text("Mass:\n"+planetInfo[planetID].mass, lx,ly+50);
         //}
-        text("Surface Gravity:\n"+planetInfo[planetID].gravity, lx, ly+110);
+        text("Surface Gravity:\n"+planetInfo[planetID].gravity+" m/s\xB2", lx, ly+110);
         if (planetID === 9){
             text("Planets:\n"+planetInfo[planetID].moons,lx,ly+160);
             text("Sun to Center of Milky Way:\n 100,000 light years",lx,ly+200);
@@ -517,7 +517,7 @@ var start = function(){
     rectMode(CENTER);
     rect(stx,sty,375,230,5);
     fill(255, 255, 255);
-    text("Solar System 2", stx,sty-70);
+    text("Solar System\xB2", stx,sty-70);
     textSize(15);
     var stopw = 1;
     text(splash[rand],stx,sty+89);
@@ -553,7 +553,7 @@ var data = function(){
     text("Date: "+Math.round(yr)+" (Example)",20,showDataY+60);     
     text("Zoom: "+Math.round(zoom),20,showDataY+20);
     text("Speed: x"+Math.round(t*50),20,showDataY+40);
-    text("Tilt: "+Math.round(tilt*90)+" degrees",20,showDataY);
+    text("Tilt: "+Math.round(tilt*90)+"\xBA",20,showDataY);
     text("Graph: "+Math.round(locationX) +", "+Math.round(locationY),20,showDataY+80);
     var moX = mouseX + locationX -JSx;
     var moY = mouseY + locationY -JSy;
@@ -593,7 +593,7 @@ var data = function(){
     text("Use arrow keys to move around", 230,JSheight-98);
     text("Use numbers to locate planets (Ex: 1 is Mercury)",500,JSheight-98);
     textSize(30);
-    text("Solar System 2", JSx,20);
+    text("Solar System\xB2", JSx,20);
     textSize(12);
     textAlign(LEFT,LEFT);
     /*if(keyCode){

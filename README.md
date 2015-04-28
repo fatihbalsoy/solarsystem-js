@@ -17,7 +17,7 @@
 
 ## Info ##
 
-This is a scale model of our solar system at a scale of 10,000 miles in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by using numbers on your keyboard. 
+This is a scale model of our solar system at a scale of 1,000,000 miles in 1 pixel. You can also track and see planets' info, AKA "Solar Experience Tool", by using numbers on your keyboard. 
 
 * 0 - Sun
 * 1 - Mercury

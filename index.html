@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
+<html><head>
   <title>Solar System</title>
   <script src="processing-1.4.8.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <meta name="theme-color" content="#000000">
   <link rel="shortcut icon" href="favicons/favicon_earth.ico">
-  <meta name="viewport" content="width=device-width">
-</head>
+  <meta name="viewport" content="width=device-width"></head>
 <body>
   <canvas id="canvas"></canvas>
-  <script src ="main.js"></script>
-  <style src ="styles.css"></style>
+  <script src="main.js"></script>
+  <style src="styles.css"></style>
   <script>
 	var JSheight = window.outerHeight-(window.outerHeight-window.innerHeight)-50;
 	var JSwidth = window.outerWidth-20;
@@ -60,8 +57,8 @@
 ~~~~~~~~~~README~~~~~~~~~~~~~~~
 /*Solar System
     Keys
-        'W' Yaw Up
-        'S' Yaw Down
+        'W' Tilt Up
+        'S' Tilt Down
         'C' Center
         'R' Restart
         'Q' Names
@@ -101,13 +98,22 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+var pcSpeed = 0.0015;
+var broSpeed = 0.05;
+var speed = pcSpeed;
+var spdInter;
+if (speed === pcSpeed){
+	spdInter = 50;
+} else {
+	spdInter = 1;
+}
 var scene = "start";
 var JSx = JSwidth/2;
 var JSy = JSheight/2;
 var locationX = JSwidth/2;
 var locationY = JSheight/2;
 var locPX = 952;
-var t = 0.0015;
+var t = speed;
 var yr = 2015;
 var mo = 1;
 var showPlInfo = false;
@@ -214,7 +220,7 @@ var planetInfo = {
     6:{name:"Uranus",type:"Gas Giant",mass:"86.81e+24 kg\n(14.54 Earths)",gravity:"8.69",moons:"27"},
     7:{name:"Neptune",type:"Gas Giant",mass:"102.4e+24 kg\n(17.15 Earths)",gravity:"11.15",moons:"13"},
     8:{name:"Pluto",type:"Dwarf Planet",mass:"1.30900e+22 kg\n(0.0066 Earths)",gravity:"0.658",moons:"4"},
-    9:{name:"Sun",type:"Star",mass:"1.989e+30 kg\n(1.3M Earths)",gravity:"28.02",moons:"8"}
+    9:{name:"Sun",type:"Star",mass:"1.989e+30 kg\n(1.3M Earths)",gravity:"28.02 ",moons:"8"}
 };
 
 var orbit = function(){
@@ -236,7 +242,6 @@ var planetDist = function(planet1, planet2){
     var dist2 = dist.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
     return planet[planet1].n+" to "+planet[planet2].n+": "+dist2;
 };
-
 var planetDesc = function(planetID){
     if(keyIsPressed){
         showPlInfo = true;   
@@ -291,7 +296,7 @@ var solarSys = function(mode){
     if(mode==="start"){
         locationX = stx/*350*/;
         locationY = sty+161/*161*/;
-        t = 0.015;
+        t = (speed/0.1);
         tilt = 0;
         zoom = 1;
     }
@@ -310,12 +315,12 @@ var solarSys = function(mode){
         if (i === 8){
             pushMatrix();
             x[i] = x[i] + locPX*zoom; 
-            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/(zoom*2), planet[i].s*1.5/(zoom*2));
             planet[i].a += t*(1.0/planet[i].y);
             popMatrix();
         } else if (i === 5){
         noFill();
-        stroke(planet[i].c);
+        stroke(planet[i].c*20);
         var ringSize = 2;
         strokeWeight(2);
         ellipse(locationX+x[i],locationY+y[i]*tilt,ringSize*2.0*zoom,ringSize*2.0*zoom*tilt);
@@ -323,25 +328,25 @@ var solarSys = function(mode){
         /******************/
         noStroke();
         fill(planet[i].c);
-            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s/1.2, planet[i].s/1.2);
         planet[i].a += t*(1.0/planet[i].y);
             if (zoom<1){
-            fill(255,255,255,100*zoom);
-            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/zoom, planet[i].s*1.5/zoom);
+            fill(255,255,255,100*zoom/1.5);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*0.8/zoom, planet[i].s*0.8/zoom);
             }
         } else if (i === 9){
             x[i] = 0;
             y[i] = 0;
             ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
-            fill(235, 242, 17,150*zoom);
-            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/(zoom*2), planet[i].s*1.5/(zoom*2));
+            fill(235, 242, 17,150*zoom/2);
+            ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*5/(zoom*2), planet[i].s*5/(zoom*2));
         } else {
             fill(planet[i].c);
-        ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s, planet[i].s);
+        ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s/1.2, planet[i].s/1.2);
         planet[i].a += t*(1.0/planet[i].y);
         //planet[i].a %= 360;
         if (zoom<1){
-            fill(255,255,255,100*zoom);
+            fill(255,255,255,100*zoom/1.5);
             ellipse(locationX+x[i], locationY+y[i]*tilt, planet[i].s*1.5/(zoom*2), planet[i].s*1.5/(zoom*2));
         }
         }
@@ -388,14 +393,14 @@ var solarSys = function(mode){
             break;
             case ',': 
                 //if (t >= 0.05){
-                    t -= 0.0015;
+                    t -= speed;
                 //}
             break;
             case '.': 
-                t += 0.0015;
+                t += speed;
             break;
             case '/':
-                t = 0.0015;
+                t = speed;
             break;
             case 'm':
                 t = 0;
@@ -505,11 +510,11 @@ var keyHelp = function(key, desc, x, y){
     }
 };
     
-    var rand = Math.floor((Math.random() * 18) + 0);
+    var rand = Math.floor((Math.random() * 22) + 0);
 var start = function(){
     textSize(7);
     planetNames();
-    var splash = [planetDist(2,9),"10,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation","Browser Compatible","BitBucket Project","Version 2 x 1.05","Just another high-tech simulator!"];
+    var splash = [planetDist(2,9),"1,000,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation","Browser Compatible","BitBucket Project","Version 2 x 1.05","Just another high-tech simulator!","Random Text!","Saturn has 200 moons!","1 million earths can fit in the sun!","Ï€ = 3.1415926535897932384626433832795028841971"];
     var fc = 0;
     textSize(30);
     textAlign(CENTER,CENTER);
@@ -527,7 +532,7 @@ var start = function(){
         scene = "solarS";
         locationX = JSx;
         locationY = JSy;
-        t = 0.0015;
+        t = speed;
         tilt = 0.3;
         zoom = 1.0;
     }
@@ -552,7 +557,7 @@ var data = function(){
     //line(x[5]+locationX,y[5]*tilt+locationY,x[4]+locationX,y[4]*tilt+locationY);
     text("Date: "+Math.round(yr)+" (Example)",20,showDataY+60);     
     text("Zoom: "+Math.round(zoom),20,showDataY+20);
-    text("Speed: x"+Math.round(t*50),20,showDataY+40);
+    text("Speed: x"+Math.round(t*spdInter),20,showDataY+40);
     text("Tilt: "+Math.round(tilt*90)+"\xBA",20,showDataY);
     text("Graph: "+Math.round(locationX) +", "+Math.round(locationY),20,showDataY+80);
     var moX = mouseX + locationX -JSx;
@@ -574,8 +579,8 @@ var data = function(){
         "-",
         "0-9"
         ],[
-        "Yaw Up",
-        "Yaw Down",
+        "Tilt Up",
+        "Tilt Down",
         "Center",
         "Restart",
         "Names",
@@ -626,7 +631,7 @@ var data = function(){
                 locationY = JSy;
             break;
             case 'r':
-				var keyR = new error("Error", "The 'R' key would crash the program for now, if you're on Mac do Command+R or if you're on Windows do Ctrl-R","JSProcessing doesn't have Program.restart()","004");
+				var keyR = new error("Error","The 'R' key would crash the program for now, if you're on Mac do Command+R or if you're on Windows fo Ctrl-R", "JSProcessing doesn't have Program.restart()","004");
 				keyR.draw();
                 Program.restart();
             break;
@@ -675,7 +680,4 @@ draw = function() {
         if (typeof draw !== 'undefined') processing.draw = draw;
     });
   </script>
-</body>
-</html>
-
-
+</body></html>

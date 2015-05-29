@@ -97,7 +97,7 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
             Current Year on the planet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
+var version = "2.52815";
 var pcSpeed = 0.0015;
 var broSpeed = 0.05;
 var speed = pcSpeed;
@@ -514,7 +514,7 @@ var keyHelp = function(key, desc, x, y){
 var start = function(){
     textSize(7);
     planetNames();
-    var splash = [planetDist(2,9),"1,000,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation","Browser Compatible","BitBucket Project","Version 2 x 1.05","Just another high-tech simulator!","Random Text!","Saturn has 200 moons!","1 million earths can fit in the sun!","Ï€ = 3.1415926535897932384626433832795028841971"];
+    var splash = [planetDist(2,9),"1,000,000 miles in 1 pixel!","LOL","In a galaxy, not far enough, there was the solar system.","Solar System!","\"Great way to visualize the Solar System\"","JavaScript + JS Processing","Keyboard Compatible!","Khan Academy!","Try it!","It's 100% free","90% bug-free","Solar Experience ToolKit","Second Generation","Browser Compatible","BitBucket Project","Version 2 x 1.05","Just another high-tech simulator!","Random Text!","Saturn has 200 moons!","1 million earths can fit in the sun!","π = 3.1415926535897932384626433832795028841971"];
     var fc = 0;
     textSize(30);
     textAlign(CENTER,CENTER);
@@ -539,6 +539,12 @@ var start = function(){
     if (keyIsPressed && key.toString() === 'r'){
         Program.restart();
     }
+	textSize(13);
+    textAlign(RIGHT);
+    text("Multithread Studio \u00A9 2015",JSwidth-20,JSheight-20);
+	text("Bilgisayar Sitesi \u00A9 2015",JSwidth-20,JSheight-5);
+	text("Version "+version,JSwidth-20,JSheight-35);
+    textAlign(LEFT);
 };
 
     var keysLocX = 0;

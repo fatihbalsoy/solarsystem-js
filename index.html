@@ -3,7 +3,7 @@
   <script src="processing-1.4.8.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <meta name="theme-color" content="#000000">
-  <link rel="shortcut icon" href="favicons/favicon_earth.ico">
+  <link rel="shortcut icon" href="favicons/favicon_earth_moon.ico">
   <meta name="viewport" content="width=device-width"></head>
 <body>
   <canvas id="canvas"></canvas>
@@ -97,7 +97,7 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
             Current Year on the planet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-var version = "2.6.115";
+var version = "2.6.3(15)";
 var name = "Solar System\xB2";
 var pcSpeed = 0.0015;
 var broSpeed = 0.05;
@@ -200,7 +200,7 @@ button.prototype.mouseIn = function() {
 
 //Needs origins
 var planet = {
-    0:{"d":35.98,"a":0,"c":color(163,101,0),"s":2,"n":"Mercury","y":0.24}, 
+    0:{"d":35.98,"a":0,"c":color(128,128,128),"s":2,"n":"Mercury","y":0.24}, 
     1:{"d":67.24,"a":0,"c":color(199,113,0),"s":2.5,"n":"Venus","y":0.62}, 
     2:{"d":92.96,"a":0,"c":color(73, 70, 252),"s":3,"n":"Earth","y":1.0},
     3:{"d":141.6,"a":0,"c":color(235, 12, 12),"s":2,"n":"Mars","y":1.88},
@@ -263,7 +263,8 @@ var planetDesc = function(planetID){
         fill(255, 255, 255,100);
         rect(x,y,177,357,5);
         
-        fill(25,118,210);
+        //fill(25,118,210);
+		fill(planet[planetID].c);
         rect(x,y-180,177,40,5);
         rect(x,y-175,177,40,0);
         
@@ -829,7 +830,7 @@ var start = function(){
 
     textAlign(RIGHT);
 
-    text("Multithread Studio \u00A9 2015",JSwidth-20,JSheight-20);
+    text("Singlethread Studio \u00A9 2015",JSwidth-20,JSheight-20);
 
 	text("Bilgisayar Sitesi \u00A9 2015",JSwidth-20,JSheight-5);
 

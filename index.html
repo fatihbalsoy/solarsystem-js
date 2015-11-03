@@ -160,11 +160,11 @@ error.prototype.draw = function() {
 };
 
 ////////Buttons//////////
-var button = function(xB, yB, width, height, fllb, radius, shape, text) {
+var button = function(xB, yB, widthB, heightB, fllb, radius, shape, text) {
     this.xB = xB;
     this.yB = yB;
-    this.width = width;
-    this.height = height;
+    this.widthB = widthB;
+    this.heightB = heightB;
     this.fllb = fllb;
     this.radius = radius;
     this.shape = shape;
@@ -175,13 +175,13 @@ button.prototype.draw = function() {
     noStroke();
     fill(this.fllb);
     if (this.shape === "ellipse"){
-        ellipse(this.xB, this.yB, this.width, this.height);
+        ellipse(this.xB, this.yB, this.widthB, this.heightB);
     } else if (this.shape === "rect") {
-        rect(this.xB, this.yB, this.width, this.height, this.radius);
+        rect(this.xB, this.yB, this.widthB, this.heightB, this.radius);
         textAlign(LEFT,LEFT);
         fill(255, 255, 255);
         textSize(20);
-        text(this.text, this.xB-20, this.yB-7, this.width, this.height);
+        text(this.text, this.xB-20, this.yB-7, this.widthB, this.heightB);
     } else {
         var btnError = new error("Error", "Function values are entered wrong or can't find that value", "There is no such element as \""+ this.shape +"\" that was entered in the \'button\' function", "003");
         btnError.draw();
@@ -192,9 +192,9 @@ button.prototype.draw = function() {
 //This is when the mouse is in the button//
 button.prototype.mouseIn = function() {
     if (this.shape === "rect"){
-        return mouseX >= this.xB && mouseY >= this.yB && mouseX <= this.xB + this.width && mouseY <= this.yB + this.height;
+        return mouseX >= this.xB && mouseY >= this.yB && mouseX <= this.xB + this.widthB && mouseY <= this.yB + this.heightB;
     } else if (this.shape === "ellipse"){
-        return mouseX >= this.xB-20 && mouseY >= this.yB-20 && mouseX <= this.xB-20 + this.width && mouseY <= this.yB-20 + this.height;
+        return mouseX >= this.xB-20 && mouseY >= this.yB-20 && mouseX <= this.xB-20 + this.widthB && mouseY <= this.yB-20 + this.heightB;
     }
 }; 
 

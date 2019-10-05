@@ -41,7 +41,7 @@
 *    ___) | (_) | | (_| | |     ___) | |_| \__ \ ||  __/ | | | | |
 *   |____/ \___/|_|\__,_|_|    |____/ \__, |___/\__\___|_| |_| |_|
 *                                     |___/		           
-*   Codename: Solar-2.24dev4202018
+*   Codename: Solar-2.28dev191005
 *   FullSize: ?width=700&height=700
 *   3D View is here!
 *   Realistic orbits, sizes, revolutions!
@@ -52,7 +52,7 @@
 *   Font: Segoe UI
 *   Short URL: http://goo.gl/zPbGpE
 *   URL Clicks: http://goo.gl/#analytics/goo.gl/zPbGpE/all_time
-*   I never copied this program: https://www.khanacademy.org/computer-programming/scale-solar-system/991918981
+*   Found this program while researching, shoutout to this guy: https://www.khanacademy.org/computer-programming/scale-solar-system/991918981
 *   Report Bugs Here:
 *   https://bitbucket.org/fatih_balsoy/solar-system-js/issues?status=new&status=open
 
@@ -104,7 +104,7 @@ in 1. You can also track and see planets' info, AKA "Solar Experience Tool", by 
 
 */
 /*variables*/
-var version = "2.24.420";
+var version = "2.28.191005";
 var name = "Solar System\xB2";
 var pcSpeed = 0.00015;
 var broSpeed = 0.05;
@@ -223,7 +223,6 @@ button.prototype.mouseIn = function() {
 }; 
 
 //Needs origins
-var planetNumber = 49;
 var earthMoonMultiplier = 20;
 var marsMoonMultiplier = 800;
 var jupiterMoonMultiplier = 20;
@@ -231,6 +230,7 @@ var saturnMoonMultiplier = 20;
 var uranusMoonMultiplier = 20;
 var neptuneMoonMultiplier = 20;
 var plutoMoonMultiplier = 200;
+var planetNumber = 50;
 var planet = {
     0:{
         "d":35.98,
@@ -770,7 +770,18 @@ var planet = {
         "coordX":0,
         "coordY":0,
         "type":"Asteroid"
-    }/*3 Juno (Asteroid)*/
+    }/*3 Juno (Asteroid)*/,
+    50:{
+        "d":117.28,
+        "a":0,
+        "c":red700,
+        "s":0.05,
+        "n":"Tesla Roadster",
+        "y":1.5646067416,
+        "coordX":0,
+        "coordY":0,
+        "type":"Asteroid"
+    }/*Tesla Roadster (Artificial Satellite)*/
 };
 var planetInfo = {
     0:{name:"Mercury",type:"Rocky Planet",mass:"3.3022e+23 kg\n(0.055 Earths)",gravity:"3.7",moons:"None"},
@@ -792,7 +803,7 @@ var orbit = function(){
         if(i === 8) {
             stroke(0, 41, 0);
             ellipse(locationX+locPX*zoom,locationY,planet[i].d*2.0*zoom,planet[i].d*2.0*zoom*tilt);
-        }else {
+        } else {
             if (planet[i].parent){
                 stroke(0, 41, 0);
                 ellipse(locationX+x[planet[i].parent], locationY+y[planet[i].parent]*tilt, planet[i].d*zoom, planet[i].d*zoom*tilt);
@@ -1045,6 +1056,15 @@ var solarSys = function(mode){
                     planet[9].s -= 0.5;
                 }
                 
+                // var keyInt = parseInt("3", 10);
+                // var dX = locationX-x[9];
+                // var dY = locationY-y[9];
+                // var dist = Math.sqrt(dX*dX + dY*dY);
+                // var e = new error(dist, "", "", "");
+                // e.draw();
+                // locationX = 1.0 * dist * zoom * cos(planet[2].a) + (JSx);
+                // locationY = 1.0 * dist * zoom * sin(planet[2].a) * tilt + (JSy);
+                
                 var ui = new uiIndicator("zoom","Zoom: "+Math.round(zoom),"-");
                 ui.draw();
             break;
@@ -1054,6 +1074,10 @@ var solarSys = function(mode){
                 }
                 zoom = zoom + 0.05;
                 planet[9].s += 0.5;
+                
+                // var keyInt = parseInt("3", 10);
+                // locationX = -x[keyInt-1]+(JSx);
+                // locationY = -y[keyInt-1]*tilt+(JSy);
                 
                 var ui = new uiIndicator("zoom","Zoom: "+Math.round(zoom),"+");
                 ui.draw();
@@ -1134,33 +1158,72 @@ var keyHelp = function(key, desc, x, y){
     }
 };
 
-var rand = Math.floor((Math.random() * 21) + 0);
+var splash = [
+        "1,000,000 miles in 1 pixel!",
+        "Since 2015",
+        // "E",
+        "\"Sounds good, I'll have some H2O TOO\"",
+        "Cat-ions are PAWSitively charged",
+        // "LOL",
+        "In a galaxy, not far enough, there was the solar system.",
+        "My favorite frequency is 50,000 Hz\nYou've probably never heard it before",
+        "Comet me bro",
+        "\"that’s one small step for a man,\none giant leap for mankind.\" – Neil Armstrong",
+        "\"We copy you down Eagle\"– Charles Duke, Capcom",
+        "\"Houston, we've had a problem\" – John Swigert",
+        "\"I'm coming back in… and it's the\nsaddest moment of my life.\" – Ed White",
+        "\"When something is important enough, you do it\neven if the odds are not in your favor.\" – Elon Musk",
+        "\"Persistence is very important. You should not\ngive up unless you are forced to give up.\" – Elon Musk",
+        "\"I think it is possible for ordinary people to\nchoose to be extraordinary.\" – Elon Musk",
+        // "Me: What's your favorite genre\nScientists: Heavy Metal Salts",
+        "Système solaire",
+        "Sistema solar",
+        "Güneş Sistemi",
+        "Sonnensystem",
+        "Sistema solare",
+        // "\"Great way to visualize the Solar System\"",
+        "JavaScript + JS Processing",
+        // "Keyboard Compatible!",
+        // "Khan Academy!",
+        // "Try it!",
+        "It's 100% free ... or is it?",
+        "99.99% bug-free",
+        "As seen on nowhere",
+        // "Solar Experience ToolKit",
+        // "Second Generation",
+        // "I am not the fastest man alive",
+        // "Browser Compatible",
+        // "BitBucket Project",
+        "Just another \"high-tech\" simulator! – Said nobody",
+        // "Random Text!",
+        "Saturn has 200 moons!",
+        "1 million earths can fit in the sun!",
+        "Tesla Roadster included",
+        "Made on Earth by Humans",
+        "Life on mars?",
+        "Planet nine?",
+        "PHS '19",
+        "v = Δs / Δt",
+        "∑F = ma",
+        "a = Δv / Δt",
+        "v = v₀ + at",
+        "E = mc²",
+        "W = mg",
+        "fₛ ≤ μₛN",
+        "fₖ = μₖN",
+        "p = mv",
+        "J = FΔt",
+        "FΔt = mΔv",
+        // "W = FΔs cos θ",
+        // "FΔs cos θ = ΔE",
+        "K = ½mv²",
+        "t = γt₀",
+        "Pi = 3.1415926535897932384626433832795028841971"];
+var rand = Math.floor((Math.random() * splash.length) + 0);
 
 var start = function(){
     textSize(7);
     planetNames();
-    var splash = [
-        planetDist(2,9),
-        "1,000,000 miles in 1 pixel!",
-        "LOL",
-        "In a galaxy, not far enough, there was the solar system.",
-        "Solar System!",
-        "\"Great way to visualize the Solar System\"",
-        "JavaScript + JS Processing",
-        "Keyboard Compatible!",
-        "Khan Academy!",
-        "Try it!",
-        "It's 100% free, or is it?",
-        "90% bug-free",
-        "Solar Experience ToolKit",
-        "Second Generation",
-        "Browser Compatible",
-        "BitBucket Project",
-        "Just another high-tech simulator!",
-        "Random Text!",
-        "Saturn has 200 moons!",
-        "1 million earths can fit in the sun!",
-        "Pi = 3.1415926535897932384626433832795028841971"];
     var fc = 0;
     var yOffset = 80;
     fill(0,0,0,50);
@@ -1198,8 +1261,11 @@ var start = function(){
     textAlign(RIGHT);
     var copyrights = [
         "Bilgisayar Sitesi \u00A9 2015",
-        "BITS LLC \u00A9 2017",
+        "BITS LLC \u00A9 2019",
+        "",
         "Version "+version,
+        "Oct 5, 2019",
+        "",
         "Muhammet Balsoy"
     ];
 	for (var i = 0; i < copyrights.length; i++){
@@ -1279,7 +1345,7 @@ var data = function(){
         "W",
         "S",
         "C",
-        "R",
+        // "R",
         "Q",
         "M",
         "[",
@@ -1294,7 +1360,7 @@ var data = function(){
         "Tilt Up",
         "Tilt Down",
         "Center",
-        "Restart",
+        // "Restart",
         "Names",
         "Stop",
         "Help Left",
@@ -1313,13 +1379,13 @@ var data = function(){
     text(name, JSx,20);
     textSize(12);
     textAlign(LEFT,LEFT);
-    /*if(keyCode){
-        switch(key.toString()){
-            case 'q':
-                orbit();
-            break;
-        }
-    }*/
+    // if(keyCode){
+    //     switch(key.toString()){
+    //         case 'q':
+    //             orbit();
+    //         break;
+    //     }
+    // }
     if(keyIsPressed){
         switch(keyCode){
             case UP:
@@ -1343,6 +1409,8 @@ var data = function(){
                 locationY = JSy;
             break;
             case 'r':
+                // scene = "start";
+                // scenePr();
 				var keyR = new error("Error","The 'R' key would crash the program for now, if you're on Mac do Command+R or if you're on Windows fo Ctrl-R", "JSProcessing doesn't have Program.restart()","004");
 				keyR.draw();
                 Program.restart();

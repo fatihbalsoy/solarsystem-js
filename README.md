@@ -1,6 +1,16 @@
-# Solar System #
+![Alt text](.readme/banner.png?raw=true  "SolarSystem.js")
 
-This is a 1,000,000 mile to 1 pixel scale of our solar system written in Processing.js. You can track and see the planets' info by holding the following numbers on your keyboard. 
+![Beware](https://img.shields.io/badge/beware-educational_🧠-red)
+![License](https://img.shields.io/badge/license-AGPL-blue)
+![Web](https://img.shields.io/badge/Web-Processing.js-lightgreen)
+
+SolarSystem.js is a 1,000,000 mile to 1 pixel scale of the Solar System running on the Processing.js library. This simulator was one of my first programs when I was learning to code back in 2015.
+
+## [Launch →](https://fatih.bal.soy/apps/solar-system)
+
+## Gameplay
+
+You can track planets by holding the following numbers on your keyboard: 
 
 * 0 - Sun
 * 1 - Mercury
@@ -13,9 +23,9 @@ This is a 1,000,000 mile to 1 pixel scale of our solar system written in Process
 * 8 - Neptune
 * 9 - Pluto
 
-## Solar Experience Tool ##
+### Solar Experience Tool ###
 
-The Solar Experience Tool displays information about the planets. To open one, you'll need to hold the numbers on your keyboard according to the order of the planets (See above). The following is featured in the Tool-box:
+On the right side, The Solar Experience Tool displays the following information about the planets:
 
 * Name
 * Type
@@ -26,9 +36,7 @@ The Solar Experience Tool displays information about the planets. To open one, y
 * Distance to Earth in miles
 * Current Year on the planet
 
-*Planet locations are not realtime information pulled from a database. All planets are perfectly aligned at the start of the program.
-
-## Keys ##
+### Keys ###
 
 * 'W'  Yaw Up
 * 'S'  Yaw Down
@@ -41,3 +49,10 @@ The Solar Experience Tool displays information about the planets. To open one, y
 * '/'  Normal Speed
 * '+'  Zoom In
 * '-'  Zoom Out
+
+## License
+
+SolarSystem.js is available under the AGPL license. See the LICENSE file for more info.
+
+## Disclaimers
+The program does not display an accurate representation of the solar system. In SolarSystem.js, the orbits are perfect, flat circles and the positions of each object do not match their real counterparts.

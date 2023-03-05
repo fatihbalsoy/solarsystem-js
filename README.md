@@ -1,23 +1,6 @@
 # Solar System #
 
-## Keys ##
-
-* 'W'  Yaw Up
-* 'S'  Yaw Down
-* 'C'  Center
-* 'R'  Restart
-* 'Q'  Names
-* 'M'  Stop Time
-* '<'  Scroll back in time
-* '>'  Scroll forward in time
-* '/'  Normal Speed
-* '+'  Zoom In
-* '-'  Zoom Out
-
-
-## Info ##
-
-This is a scale model of our solar system at a scale of 1,000,000 miles in 1 pixel. You can also track and see planets' info, AKA "Solar Experience Tool", by using numbers on your keyboard. 
+This is a 1,000,000 mile to 1 pixel scale of our solar system written in Processing.js. You can track and see the planets' info by holding the following numbers on your keyboard. 
 
 * 0 - Sun
 * 1 - Mercury
@@ -32,7 +15,7 @@ This is a scale model of our solar system at a scale of 1,000,000 miles in 1 pix
 
 ## Solar Experience Tool ##
 
-The Solar Experience Tool is currently in beta, which is not stable. The only stabilized feature is the info inside it. To open one, you'll need to use numbers according to the order of the planets (See Above in Info). The following is featured in the Tool-box:
+The Solar Experience Tool displays information about the planets. To open one, you'll need to hold the numbers on your keyboard according to the order of the planets (See above). The following is featured in the Tool-box:
 
 * Name
 * Type
@@ -42,3 +25,19 @@ The Solar Experience Tool is currently in beta, which is not stable. The only st
 * Distance to Sun in miles
 * Distance to Earth in miles
 * Current Year on the planet
+
+*Planet locations are not realtime information pulled from a database. All planets are perfectly aligned at the start of the program.
+
+## Keys ##
+
+* 'W'  Yaw Up
+* 'S'  Yaw Down
+* 'C'  Center
+* 'R'  Restart
+* 'Q'  Names
+* 'M'  Stop Time
+* '<'  Scroll back in time
+* '>'  Scroll forward in time
+* '/'  Normal Speed
+* '+'  Zoom In
+* '-'  Zoom Out

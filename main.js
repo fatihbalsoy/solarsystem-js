@@ -38,8 +38,6 @@ var processing = new Processing(canvas, function (processing) {
         *   Short URL: http://goo.gl/zPbGpE
         *   URL Clicks: http://goo.gl/#analytics/goo.gl/zPbGpE/all_time
         *   Found this program while researching, shoutout to this guy: https://www.khanacademy.org/computer-programming/scale-solar-system/991918981
-        *   Report Bugs Here:
-        *   https://bitbucket.org/fatih_balsoy/solar-system-js/issues?status=new&status=open
         
         ~~~~~~~~~~README~~~~~~~~~~~~~~~
         
@@ -1241,13 +1239,10 @@ var processing = new Processing(canvas, function (processing) {
             textSize(13);
             textAlign(RIGHT);
             var copyrights = [
-                "Bilgisayar Sitesi \u00A9 2015",
-                "BITS LLC \u00A9 2019",
-                "",
                 "Version " + version,
                 "Oct 5, 2019",
                 "",
-                "Muhammet Balsoy"
+                "Fatih Balsoy \u00A9 2023"
             ];
             for (var i = 0; i < copyrights.length; i++) {
                 text(copyrights[i], JSwidth - 20, (JSheight - 5) - (i * 15));
